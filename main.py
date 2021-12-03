@@ -2,6 +2,16 @@ import random
 import copy
 from itertools import permutations
 
+def ataques(cromossomo):
+    ataques = 0
+    tamanho = len(cromossomo)
+    for i in range(tamanho)
+        for j in range(tamanho):
+            if (abs(i-j) == abs(cromossomo[i] - cromossomo[j]) and i != j):
+                ataques = ataques + 1
+               
+    return -1 * ataques//2
+
 def criarFilho(pai, corte):
     filho = [None] * (len(pai))
     for i in range(corte):
@@ -26,30 +36,23 @@ def cruzar(p1, p2):
            
     return f1, f2
 
+def gerarIndividuo(tamanho):
+    new_list = []
+
+    while len(new_list) < tamanho:
+        new_element = random.randint(0, tamanho-1)
+        if new_element not in new_list:
+            new_list.append(new_element)
+
+    return new_list
+
 def gerarPopulacaoInicial(tamanhoTabuleiro):
     tamanhoPopulacao = tamanhoTabuleiro * 2
     populacao = []
-    solucaoBasica = []
     for i in range(tamanhoPopulacao):
-        solucaoBasica.append(i)
-
-    permutacoes = permutations(solucaoBasica, tamanhoTabuleiro)
+        individuo = gerarIndividuo(tamanhoTabuleiro)
+        populacao.append(individuo)
    
-    individuos = []
-
-    contador = 0
-    for i in range(tamanhoPopulacao):
-        sorteado = 0
-        solucao = []
-        for elem in permutacoes:
-            contador += 1
-            genes = []
-            for gene in elem:
-                genes.append(gene)
-            individuos.append(genes)
-       
-        populacao.append(individuos[random.randint(0, contador)])
     return populacao
    
-
 print(gerarPopulacaoInicial(7))
